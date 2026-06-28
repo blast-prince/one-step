@@ -45,11 +45,21 @@ def 获取用户输入():
 		except ValueError:
 			print("\033[31m❌ 请输入有效的数字！\033[0m")
 
-print("\033[32m输入0关闭\n输入999查看统计\033[0m")
+def 显示历史记录():
+		if len(numbers)==0:
+			print("\033[33m📭 暂无历史记录\033[0m")
+		else:
+			print("\033[36m📜 历史记录：\033[0m")
+			for i,num in enumerate(numbers,1):
+				print(f"{i}、{num}")
+			print(f"共{len(numbers)}条记录")
+print("\033[32m输入0关闭\n输入999查看统计\n输入888查看历史记录\033[0m")
 while True:
 	num = 获取用户输入()
 	if num == 999:
 		显示统计()	
+	elif num==888:
+		显示历史记录()
 	elif num == 0:
 		保存数据()
 		print("再见")
