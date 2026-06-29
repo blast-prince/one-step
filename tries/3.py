@@ -1,0 +1,5 @@
+time = input("输入工时：")
+money = input("输入时薪：")
+all = int(time)*int(money)
+print(f"您每周的工资是{all}")
+input("按回车键结束...")
