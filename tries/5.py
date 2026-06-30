@@ -8,14 +8,14 @@ def 加载数据():
 	try:
 		with open(任务文件, "r", encoding="utf-8") as f:
 	
-		return [line.strip() for line in f.readlines()]
+			return [line.strip() for line in f.readlines()]
 	except FileNotFoundError:
 		return []
 
 def 保存数据():
 	with open(任务文件, "w", encoding="utf-8") as f:
 		for 任务 in 任务列表:
-		f.write(任务 + "\n")
+			f.write(任务 + "\n")
 
 def 显示任务():
 	if len(任务列表) == 0:
@@ -23,9 +23,8 @@ def 显示任务():
 	else:
 		print("\n📋 你的待办清单：")
 		for i, 任务 in enumerate(任务列表, 1):
-		print(f"  {i}. {任务}")
+			print(f"  {i}. {任务}")
 
-	
 任务列表 = 加载数据()
 
 print("\n📝 待办事项清单 1.0\n输入 1 添加任务\n输入 2 删除任务\n输入 3 查看任务\n输入 0 退出")
@@ -61,9 +60,9 @@ while True:
 		except ValueError:
 				print("❌ 请输入有效数字")
 	elif 命令 == "0":
-        保存数据()
-        input("按回车键结束...")
-        break
+		保存数据()
+		input("按回车键结束...")
+		break
     
-    else:
-        print("❌ 未知命令，请输入 add / done / list / exit")
+	else:
+		print("❌ 未知命令，请输入 add / done / list / exit")
