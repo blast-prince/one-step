@@ -2,6 +2,10 @@ import os
 
 DATA = "生成数据包/data.txt"
 
+def 删除数据():
+	numbers.clear()
+	print("已删除历史记录")
+
 def 加载数据():
 	try:
 		with open(DATA,"r") as f:
@@ -53,16 +57,21 @@ def 显示历史记录():
 			for i,num in enumerate(numbers,1):
 				print(f"{i}、{num}")
 			print(f"共{len(numbers)}条记录")
-print("\033[32m输入0关闭\n输入999查看统计\n输入888查看历史记录\033[0m")
+print("\033[32m输入0关闭\n输入999查看统计\n输入888查看历史记录\n输入777删除历史记录\033[0m")
 while True:
 	num = 获取用户输入()
 	if num == 999:
 		显示统计()	
+		保存数据()
 	elif num==888:
 		显示历史记录()
+		保存数据()
+	elif num==777:
+		删除数据()
+		保存数据()
 	elif num == 0:
 		保存数据()
-		print("再见")
+		input("按下回车键结束...")
 		break
 	else:
 		数字处理(num)
