@@ -11,6 +11,7 @@ def 显示菜单():
 	print("3. 查看统计信息")
 	print("4. 数据分布分析")
 	print("5. 删除项")
+	print("6. 导入TXT数据")
 	print("0. 退出")
 
 def 添加数据():
@@ -100,6 +101,55 @@ def 保存数据():
     except Exception as e:
         print(f"❌ 保存失败: {e}")
 
+def 导入数据():
+    file_path = input("请输入TXT文件的完整路径：")
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        
+        成功计数 = 0
+        跳过计数 = 0
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            
+            parts = line.split(',')
+            if len(parts) != 2:
+                parts = line.split('\t')
+            
+            if len(parts) != 2:
+                print(f"⚠️ 跳过格式错误行: {line}")
+                跳过计数 += 1
+                continue
+            
+            name = parts[0].strip()
+            try:
+                value = float(parts[1].strip())
+            except ValueError:
+                print(f"⚠️ 跳过 {name}，数值 '{parts[1].strip()}' 不是有效数字")
+                跳过计数 += 1
+                continue
+            
+            if name in scores:
+                print(f"⚠️ 跳过已存在项: {name}，当前数值 {scores[name]}")
+                跳过计数 += 1
+                continue
+            
+            scores[name] = value
+            成功计数 += 1
+        
+        print(f"✅ 导入完成！成功导入 {成功计数} 条，跳过 {跳过计数} 条记录。")
+        保存数据()
+    except FileNotFoundError:
+        print(f"❌ 错误：找不到文件 '{file_path}'")
+    except Exception as e:
+        print(f"❌ 读取文件时发生错误: {e}")
+
+
+
+
+
 if os.path.exists(数据文件):
     try:
         with open(数据文件, 'r', encoding='utf-8') as f:
@@ -133,6 +183,9 @@ while True:
     elif 命令 == "5":
         删除数据()
         保存数据()
+    elif 命令 == "6":
+        导入数据()
+        保存数据()        
     else:
         print("⚠️ 请输入正确指令")
 
