@@ -7,3 +7,4 @@ def 菜单
 
 input("请输入文件地址")
 break
+md,停电了
